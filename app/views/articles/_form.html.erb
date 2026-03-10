@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card" style="width: 18rem;">
+    <%= form_with model: @article do |form| %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @article.new_record? ? "New Article" : "Edit Article" %></h5>
+        <%= form.label :title , class:"form-label" %>
+        <%= form.text_field :title, class:"form-control", placeholder:"Enter title of article" %>
+        <% @article.errors.full_messages_for(:title).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+        <br>
+        <%= form.label :body , class:"form-label" %>
+        <%= form.text_area :body, class:"form-control", placeholder:"Enter body of article" %>
+        <% @article.errors.full_messages_for(:body).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+        <br>
+        <%= form.label :status , class:"form-label" %>
+        <%= form.select :status, Article::VALID_STATUSES, class:"form-control" %>
+        <div class="text-end">
+          <%= form.submit class:"btn btn-success" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<%# articles show page %>
+<h1>Article</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @article.title %></td>
+        <td><%= @article.body %></td>
+        <td>
+        </td>
+      </tr>
+  </tbody>
+</table>
+<%= render "comments/form" %>
+<%= render "comments/comments", article: @article %>
