@@ -8,7 +8,7 @@
   </thead>
     <tbody>
       <% @article.comments.each do |comment| %>
-        <% unless comment.archived? %>
+        <% unless comment.archived? || comment.new_record? %>
         <tr>
           <td><%= comment.title %></td>
           <td><%= comment.body %></td>

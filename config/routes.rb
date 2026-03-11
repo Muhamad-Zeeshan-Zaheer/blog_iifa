@@ -16,4 +16,63 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
+
+  #user routes
+  #route: get '/users/:id', to: 'users#show', as: :user
+  get '/users/:id', to: 'users#show', as: 'user'
+  get '/users/:id', to: 'users#show'
+  #practice routes for the brands and products
+  resources :brands, only: [:index, :show] do
+    resources :products, only: [:index, :show]
+  end
+
+  #practice routes for the basket
+  resource :basket, only: [:show, :update, :destroy]
+  resolve("Basket") { route_for(:basket) }
+
+  #practice routes for the photos
+  resources :photos
+
+  namespace :admin do
+    resources :articles
+  end
+
+  scope '/admin' do
+    resources :articles
+  end
+
+  resources :articles, module: 'admin'
+
+  resources :magazines do
+    resources :ads
+  end
+
+  resources :publishers do
+    resources :magazines do
+      resources :photos
+    end
+  end
+
+
+  resources :articles, shallow: true do
+    resources :comments
+    resources :quotes
+  end
+
+  concern :commentable do
+    resources :comments
+  end
+
+  concern :image_attachable do
+    resources :images, only: :index
+  end
+
+  resources :photos do
+    member do
+      get 'preview'
+    end
+  end
+
+
+
 end
