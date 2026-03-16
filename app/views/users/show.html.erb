@@ -1,0 +1,10 @@
+<%= content_tag :h1, @user.welcome %>
+
+<p>
+  <strong>Email:</strong> <%= @user.email %>
+</p>
+
+<p>
+  <%= link_to "Back to Articles", articles_path %> |
+  <%= link_to "Sign Out", session_path, data: { turbo_method: :delete } %>
+</p>

@@ -1,0 +1,12 @@
+<%= content_tag :h1, "Sign Up" %>
+
+<% if flash[:error] %>
+  <%= content_tag :p, flash[:error], style: "color: red;" %>
+<% end %>
+
+<%= form_with model: @user, url: users_path do |f| %>
+  <%= f.text_field :email, placeholder: "Email" %><br><br>
+  <%= f.password_field :password, placeholder: "Password" %><br><br>
+  <%= link_to "Sign In", new_session_path %>
+  <%= f.submit "Sign Up!" %>
+<% end %>
