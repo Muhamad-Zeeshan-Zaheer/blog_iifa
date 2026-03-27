@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @articles = Article.all
+    @articles = current_user.articles.paginate(page: params[:page], per_page: 1)
   end
 
   def show
@@ -21,7 +22,6 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    debugger
     @article = Article.find(params[:id])
   end
 
