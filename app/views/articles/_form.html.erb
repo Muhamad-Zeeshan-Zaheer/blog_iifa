@@ -9,6 +9,12 @@
           <div><%= message %></div>
         <% end %>
         <br>
+        <%= form.label :category_id , class:"form-label" %>
+        <%= form.collection_select :category_id, Category.all, :id, :title, { prompt: "Select a category" }, class: "form-control" %>
+        <% @article.errors.full_messages_for(:category_id).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+        <br>
         <%= form.label :body , class:"form-label" %>
         <%= form.text_area :body, class:"form-control", placeholder:"Enter body of article" %>
         <% @article.errors.full_messages_for(:body).each do |message| %>

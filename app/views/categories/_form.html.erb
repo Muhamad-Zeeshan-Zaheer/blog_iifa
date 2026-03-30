@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card" style="width: 18rem;">
+    <%= form_with model: @category do |form| %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @category.new_record? ? "New Category" : "Edit Category" %></h5>
+        <%= form.label :title , class:"form-label" %>
+        <%= form.text_field :title, class:"form-control", placeholder:"Enter title of category" %>
+        <% @category.errors.full_messages_for(:title).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+        <br>
+        <div class="text-end">
+          <%= form.submit class:"btn btn-success" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,11 +1,16 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @articles = current_user.articles.paginate(page: params[:page], per_page: 1)
+    @categories = Category.all
   end
 
   def show
     @article = Article.find(params[:id])
+  end
+
+  def category_articles
+    @category = Category.find(params[:category_id])
+    @articles = @category.articles.where.not(status: 'archived')
   end
 
   def new
@@ -13,7 +18,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
     if @article.save
       redirect_to @article
     else
@@ -42,6 +47,6 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status)
+      params.require(:article).permit(:title, :body, :status, :category_id)
     end
 end

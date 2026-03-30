@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "categories/index"
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
@@ -19,5 +20,12 @@ Rails.application.routes.draw do
   #articles routes
   resources :articles do
     resources :comments
+  end
+
+  #categories routes
+  resources :categories do
+    member do
+      get :articles
+    end
   end
 end
