@@ -9,27 +9,32 @@
         <li class="nav-item">
           <%= link_to 'Home', root_path, class: 'nav-link active', 'aria-current': 'page' %>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Articles
-          </a>
-          <ul class="dropdown-menu">
-            <%= link_to 'All Articles', articles_path, class: 'dropdown-item' %>
-            <%= link_to 'New Article', new_article_path, class: 'dropdown-item' %>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
-          </a>
-          <ul class="dropdown-menu">
-            <%= link_to 'All Categories', categories_path, class: 'dropdown-item' %>
-            <%= link_to 'New Category', new_category_path, class: 'dropdown-item' %>
-          </ul>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Articles
+            </a>
+            <ul class="dropdown-menu">
+              <%= link_to 'All Articles', articles_path, class: 'dropdown-item' %>
+              <%= link_to 'New Article', new_article_path, class: 'dropdown-item' %>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu">
+              <%= link_to 'All Categories', categories_path, class: 'dropdown-item' %>
+              <%= link_to 'New Category', new_category_path, class: 'dropdown-item' %>
+            </ul>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
+          <li class="nav-item">
+            <span class="navbar-text me-3">Hi, <%= current_user.email %></span>
+          </li>
           <li class="nav-item">
             <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link', method: :delete %>
           </li>

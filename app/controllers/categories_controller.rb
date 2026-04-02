@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 
   def articles
     @category = Category.find(params[:id])
-    @articles = @category.articles.where.not(status: 'archived')
+    @articles = @category.articles.where(status: 'public').or(@category.articles.where(user: current_user, status: 'draft')).where.not(status: 'archived')
   end
 
   def new

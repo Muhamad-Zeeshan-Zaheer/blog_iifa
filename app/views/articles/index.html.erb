@@ -12,7 +12,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= category.title %></h5>
             <p class="card-text">
-              <%= category.articles.count %> articles
+              <%= @category_counts[category.id] %> articles
             </p>
             <%= link_to "View Articles", articles_category_path(category), class: "btn btn-primary" %>
           </div>
