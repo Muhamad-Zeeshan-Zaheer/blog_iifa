@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  #notifications routes
+  mount ActionCable.server => '/cable'
+
   #categories routes
   resources :categories do
     member do
